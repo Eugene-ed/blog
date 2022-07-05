@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+</head>
+<body>
+    <style>
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            font-size: 25px;
+            color: yellow;
+        }
+    </style>
+
+    <div>
+        {% for i in fback %}
+            {{i.author}}<br><br>
+            {{i.text}}<br><br>
+            {{i.publish_date}}<br>
+            Rating: {{i.rating}}<br><br><br>
+        {% endfor%}
+    </div>
+
+
+
+<!--    <h2>Add feedback</h2>-->
+<!--&lt;!&ndash;{% csrf_token %} для защиты запроса от фишинга&ndash;&gt;-->
+<!--    <form action="" method="POST">{% csrf_token %}-->
+<!--&lt;!&ndash;   as_p отрисовывает как тег <p>&ndash;&gt;-->
+<!--    {{ form.as_p}}-->
+<!--     <input type="submit" value="Add feedback">-->
+<!--</form>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--    <div style="text-align: left ">-->
+<!--        <a style="font-size: 20px; color:black; border-style: double; border-radius: 20px; padding: 5px" href="{% url 'post_list' %}">-->
+<!--            <- Back to main</a>-->
+<!--    </div>-->
+
+
+
+
+</body>
+</html>

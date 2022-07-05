@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post list</title>
+</head>
+<body>
+<style>
+    a {
+        text-decoration: none;
+    }
+    a:hover {
+<!--        font-size: 25px; -->
+            color: yellow;
+    }
+</style>
+<!--items-->
+    <div style="text-align: center">
+        <p style="font-size: 50px; color:black; margin-top: 40px; margin-bottom: 40px">Teach Me</p>
+    </div>
+<!--        <div style="text-align: center">-->
+<!--            <a style="text-align: center ; margin: 25px; font-size: 35px; color:black" href="{% url 'post_list' %}">-->
+<!--                <i>{{post.category}}</i>-->
+<!--            </a>-->
+<!--        </div>-->
+     <div style="text-align: left ;margin: 20px">
+        <a style="margin: 5px; font-size: 20px; color:black; border-style: double; border-radius: 20px; padding: 5px" href="{% url 'post_new'%}">
+            Create new post
+        </a>
+        <a style="margin: 5px; font-size: 20px; color:black; border-style: double; border-radius: 20px; padding: 5px" href="{% url 'post_draft'%}">
+            See drafts
+        </a>
+        <a style="margin: 5px; font-size: 20px; color:black; border-style: double; border-radius: 20px; padding: 5px" href="{% url 'post_list'%}">
+            Published Posts
+        </a>
+    </div>
+            <div style="text-align: left; margin: 25px; margin-right: 100px; margin-bottom: 500px; position: absolute; padding: 10px; padding-right: 100px; padding-bottom: 100px">
+                <h3><i>Categories</i></h3>
+                {% for i in category %}
+                <br>
+                <a style="text-align: left; border-style: outset" href="{% url  'categories' category_pk=i.pk %}">
+                    {{i}}
+                </a>
+                <br>
+                {% endfor %}
+            </div>
+    <div style = "text-align: center; margin: 25px;">
+        {% for post in items %}
+        <div style = "text-align: left; margin: 25px; display: inline-block; ">
+            <div style="border: 1px solid black">
+                 <div class='titles' style="margin: 20px; text-align:center; font-size: 25px">
+                    <a href="{% url 'post_detail' post_pk=post.pk %}">{{ post.title }}</a>
+                 </div>
+                 <div style="border-top: 1px solid" >
+                     {{ post.publish_date }}
+                     {{ post.feedbacks__rating__avg }}
+                 </div>
+                 <div style="border-top: 1px solid" >
+                     {{post.author}}
+                 </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+        <h5 style="itext-align: left; margin: 25px; margin-top: 20%">
+            Posts amount {{counter}}
+        </h5>
+
+<div style="margin: 20px">
+    <a style="margin: 5px; itext-align: left; margin-top: 20%"
+       href="{% url 'recommends' %}">
+        <h3>Recommendations</h3>
+    </a>
+</div>
+<div style="text-align: left ;margin: 20px">
+        <a style="margin: 5px; font-size: 20px; color:black; border-style: double; border-radius: 20px; padding: 5px" href="{% url 'myposts' %}">
+            My Posts
+        </a>
+</div>
+
+</body>
+</html>

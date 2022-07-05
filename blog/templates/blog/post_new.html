@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<style>
+    a {
+        text-decoration: none;
+    }
+    a:hover {
+<!--        font-size: 25px; -->
+            color: yellow;
+    }
+</style>
+
+<h2>Create new post</h2>
+<!--{% csrf_token %} для защиты запроса от фишинга-->
+<form action="" method="POST">{% csrf_token %}
+
+<!--  <label for="fname">Post name</label><br>-->
+<!--  <input type="text" id="fname" name="fname" value="John"><br>-->
+<!--  <label for="lname">Text</label><br>-->
+<!--  <input type="text" id="lname" name="lname" value="Doe"><br><br>-->
+<!--  <input type="submit" value="Submit">-->
+
+<!--   as_p отрисовывает как тег <p>-->
+    {{ form.as_p}}
+     <input type="submit" value="Submit">
+</form>
+<br>
+<br>
+<br>
+<div style="text-align: left ">
+    <a style="font-size: 20px; color:black; border-style: double; border-radius: 20px; padding: 5px" href="{% url 'post_list' %}">
+        <- Back to main</a>
+</div>
+
+
+</body>
+</html>

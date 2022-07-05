@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post list</title>
+</head>
+<body>
+<style>
+    a {
+        text-decoration: none;
+    }
+    a:hover {
+<!--        font-size: 25px; -->
+            color: yellow;
+    }
+</style>
+<!--    {{ items }}} -->
+    <div style="text-align: center; margin-top: 40px; margin-bottom: 40px">
+        <a style="font-size: 50px; color:black" href="{% url 'post_list' %}">Teach Me</a>
+    </div>
+        <div style="text-align: center">
+            <a style="text-align: center ; margin: 25px; font-size: 35px; color:black" href="{% url 'post_list' %}">
+                <i>{{post.category}}</i>
+            </a>
+        </div>
+    <div>
+        <a style="text-align: left ; margin: 25px; font-size: 20px; color:black;
+         border-style: double; border-radius: 20px; padding: 5px" href="{% url 'post_list' %}">
+            <- Back to main
+        </a>
+    </div>
+
+
+    <div style ="" >
+        <div style="text-align: center">
+            <div style="margin-top: 20px">
+                {{ post.publish_date }}
+            </div>
+            <div style="margin-top: 20px">
+                Created on {{ post.create_date }}
+            </div>
+            <div style="font-size: 38px; padding: 40px">
+                <a>{{ post.title }}
+                </a>
+            </div>
+            <div style="">
+                {{ post.text }}
+            </div>
+        </div>
+    </div>
+    <br><br><br><br>
+    <div style="text-align: left ;margin: 20px">
+        <a style="margin: 5px; font-size: 20px; color:black;
+         border-style: double; border-radius: 20px; padding: 5px" href="{% url 'post_edit' post_pk=post.pk %}">
+            Edit
+        </a>
+        <a style="margin: 5px; font-size: 20px; color:black;
+         border-style: double; border-radius: 20px; padding: 5px" href="{% url 'post_delete' post_pk=post.pk %}">
+            Delete
+        </a>
+        <!-- Открываем условие, если пост не опубликован -->
+        {% if post.published_1 == False  %}
+        <a style="margin: 5px; font-size: 20px; color:black;
+         border-style: double; border-radius: 20px; padding: 5px" href="{% url 'post_publish' post_pk=post.pk %}">
+            Publish
+        </a>
+        {% endif  %}
+
+    </div>
+    <div style="text-align: left ;margin: 20px">
+        <a style="margin: 5px; font-size: 20px; color:black; border-style: double; border-radius: 20px; padding: 5px"
+           href="{% url 'feedback' post_pk=post.pk %}">
+           Feedback
+        </a>
+    </div>
+    <p style=" margin: 25px; color:black; border-style: dotted; padding: 5px; width: 80px">
+            Rating: {{rating}}</p>
+<!--кнопка-->
+<br><br><br>
+    <h3 style="text-align: left ;margin: 10px"> Comments </h3>
+    <div style="text-align: left ;margin: 20px; margin-right: 70%;  margin-bottom: auto; border-style: outset; padding: 10px">
+    {% for i in comment %}
+        <br>
+        {{i.author}}<br>
+        <a style="font-size: 20px">
+        {{i.text}}
+        </a><br><br>
+        {{i.publish_date}}
+        {% if user.id == i.author.id %}
+        <form action = "comment_delete">
+            <input type="hidden" value="{{i.pk}}" name="pk"><br>
+                <a type="button" style="border-style: double; border-color: black; color: black"  href="{% url 'comment_delete' post_pk=post.pk comment_pk=i.pk %}">
+                Delete
+                </a>
+        </form>
+        {% endif %}
+    {% endfor %}
+    </div>
+
+    <form action="" method="POST">{% csrf_token %}
+        <p style="text-align: left ;margin: 20px">Add a new comment:</p>
+                    {{comment_form.as_p}} <br>
+        <input type="submit" value="Add"/>
+    </form>
+    <div style="text-align: left ;margin: 20px">
+        <h5>Comments amount {{counter}}</h5>
+    </div>
+</body>
+</html>
